@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge, chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="robots" content="index, follow, archive">
+    <meta name="theme-color" content="#000000">
+    <meta name="keywords" content="" /> 
+    <meta name="description" content="" /> 
+    <meta name="author" content="N.E. Lilly">
+    <!-- <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5"> -->
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="theme-color" content="#ffffff">
+    <title>Accessibility Workflow</title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Libre+Baskerville);
+
+      @keyframes focused {
+        0% { outline-offset: .125rem; outline-color: rgba(255, 0, 0, 0.25); }
+        5% { outline-offset: .25rem; outline-color: rgba(255, 0, 0, .87); }
+        10% { outline-offset: .125rem; outline-color: rgba(255, 0, 0, 0.25); }
+      }
+      @keyframes fading {
+        0% { outline-color: rgba(255, 0, 0, 0.25); }
+        50% { outline-color: rgba(255, 0, 0, .66); }
+        100% { outline-color: rgba(255, 0, 0, 0.25); }
+      }
+      *, *:after, *:before { box-sizing: inherit; }
+      a, button, input, textarea, form > fieldset > label > input[type=radio] + span {
+        font-family: 'Libre Baskerville', sans-serif; 
+        font-size: 1rem;
+        outline: 1rem solid rgba(255, 0, 0, 0);
+        outline-offset: 1rem;
+      }
+      :focus,
+      form > fieldset > label > input[type=radio]:focus + span {
+        outline: 3px solid rgba(255, 0, 0, .5);
+        outline-offset: .125rem;
+        transition: .1666s outline ease-in, .1666s outline-offset ease-in, .1666s background-color ease-in, .1666s color ease-in, .1666s text-shadow ease-in;
+        animation-duration: 2.5s, 2.5s;
+        animation-name: focused, fading;
+        animation-iteration-count: infinite, infinite;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        :focus,
+        form > fieldset > label > input[type=radio]:focus + span,
+        #skip {
+          animation-duration: none, none;
+          animation-name: none, none;
+          animation-iteration-count: none, none;
+        }
+      }
+      html { 
+        -moz-box-sizing: border-box;
+        -ms-text-size-adjust: 100%; /* 2 */
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: 100%; /* 2 */
+        background: #f1f1e5; 
+        box-sizing: border-box;
+        font-family: 'Libre Baskerville', sans-serif; 
+        font-size: calc(18px + .2vw); 
+        font-weight: 400; 
+        line-height: 1.6; /* 1 */
+        text-shadow: 0px 1px 1px rgba(0,0,0,0.3);
+      }
+      #skip {
+        background-color: rgba(0,0,0,0.87);
+        color: #eee;
+        margin-left: 3em;
+        padding: 1em 2em;
+        position: absolute;
+        text-decoration: none;
+        top: -90px;
+        transition: .1666s top ease-out;
+        z-index: 1;
+      }
+      #skip:focus {
+        position: absolute;
+        top: 1em;
+      }
+      body {
+        margin: 0;
+      }
+      .header {
+        background-color: #000;
+        border-bottom: 1px solid #222;
+        padding: .5rem 1rem;
+        top: 0;
+      }
+      .header > section {
+        display: flex;
+        margin: 0 auto;
+        max-width: 1280px;
+        padding: 0 .25rem;
+      }
+      .header h1 {
+        font-size: 1.5rem;
+        font-weight: normal;
+      }
+      .header h1 a {
+        color: #fff;
+        text-decoration: none;
+      }
+      .header > section > nav > a {
+        text-decoration: none;
+        color: #fff;
+      }
+      .header > section > nav:last-of-type {
+        margin-left: auto;
+      }
+      body > main {
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      body > main > article {
+        flex: 1;
+        margin: 0 auto; 
+        max-width: 1280px; 
+        padding: 0 1rem;
+        width: 100%;
+      }
+      h1{
+        font-size: 3vw;
+        margin: 0;
+        padding: 0;
+      }
+      h2 {
+        margin: 0 0 0.5rem;
+        padding: 0;
+      }
+      h3 {
+        margin: 0 0 0.5rem;
+        padding: 0;
+      }
+
+      .menu {
+        position: relative;
+        /* width: 200px; */
+      }
+      .menu_user {
+        color: #fff;
+      }
+      .menu_username {
+        vertical-align: top;
+      }
+      .menu:hover .menu_fly,
+      .menu:focus-within .menu_fly,
+      .menu a:hover + .menu_fly,
+      .menu a:focus + .menu_fly {
+        display: block;
+      }
+      .menu_fly {
+        background-color: #eee;
+        box-shadow: 0px 0px .25em rgba(0,0,0,0.3), 0px .25em .5em rgba(0,0,0,0.3);
+        color: #000;
+        display: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        right: 0;
+        top: 2.5rem;
+      }
+      .menu_item {
+        display: block;
+        margin: 0;
+        padding: 0;
+      }
+      .menu_link {
+        background-color: transparent;
+        border: 1px solid #999;
+        border-top: 0;
+        color: #000;
+        cursor: pointer;
+        display: block;
+        margin: 0;
+        padding: .5rem 1rem;
+        text-decoration: none;
+        width: 100%;
+      }
+      .menu_item:first-of-type {
+        border-top: 1px solid #999;
+      }
+      .menu_link:hover {
+        background-color: #fff;
+      }
+
+      #search {
+        background-color: transparent;
+      }
+      .search_label {
+        clip: rect(1px, 1px, 1px, 1px);
+        height: 1px;
+        overflow: hidden;
+        position: absolute !important;
+        width: 1px;
+        padding: .5rem;
+      }
+      input[type=search].search_input {
+        border-radius: .25rem;
+        margin-bottom: 0;
+        padding: .25rem 2rem .25rem .5rem;
+      }
+      .search_field {
+        margin: auto 1rem auto auto;
+      }
+      .search_field form {
+        display: flex;
+      }
+      #search input {
+        width: 100%;
+      }
+      #search button {
+        margin-left: -2.2rem;
+        padding-top: .25rem;
+        background: none;
+        border: none;
+      }
+
+      .footer {
+        background-color: #191511;
+        color: #e9e5e1;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 1rem;
+      }
+      .footer a {
+        color: #fff;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <a id="skip" href="#top">skip navigation</a>
+    <main id="main"></main>
+  </body>
+</html>

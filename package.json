@@ -1,0 +1,426 @@
+{
+  "name": "a11y-workflow",
+  "version": "1.0.0",
+  "description": "Code and NPM packages to implement an accessibilty workflow.",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "start": "NODE_ENV=development webpack-dev-server --open --mode development",
+    "build": "NODE_ENV=production npm run clean && webpack -p",
+    "lint": "npm run lint:js && npm run lint:css",
+    "lint:js": "eslint . --ext js",
+    "lint:css": "stylelint './src/**/*.css'",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nelilly/a11y-workflow.git"
+  },
+  "keywords": [
+    "a11y",
+    "accessibility",
+    "workflow"
+  ],
+  "author": "N.E.Lilly",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nelilly/a11y-workflow/issues"
+  },
+  "homepage": "https://github.com/nelilly/a11y-workflow#readme",
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "copy-webpack-plugin": "^5.0.3",
+    "css-loader": "^2.1.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.3.5",
+    "eslint": "^5.16.0",
+    "eslint-config-google": "^0.13.0",
+    "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.6.1",
+    "file-loader": "^4.1.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^2.4.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.8.0",
+    "jest-axe": "^3.2.0",
+    "mini-css-extract-plugin": "^0.7.0",
+    "react": "^16.8.6",
+    "react-axe": "^3.2.0",
+    "react-dom": "^16.8.6",
+    "regenerator-runtime": "^0.13.2",
+    "rimraf": "^2.6.3",
+    "style-loader": "^0.23.1",
+    "stylelint": "^10.1.0",
+    "stylelint-a11y": "^1.2.1",
+    "stylelint-config-css-modules": "^1.4.0",
+    "stylelint-config-recommended": "^2.2.0",
+    "url-loader": "^2.1.0",
+    "webpack": "^4.37.0",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "dependencies": {
+    "aws-amplify": "^1.1.32",
+    "react-router-dom": "^4.3.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm test",
+      "pre-push": "npm run test:coverage"
+    }
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "google",
+      "plugin:react/recommended",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "plugin:jsx-a11y/recommended"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "settings": {
+      "react": {
+        "createClass": "createReactClass",
+        "pragma": "React",
+        "version": "detect"
+      },
+      "import/resolver": {
+        "node": {
+          "paths": [
+            "src"
+          ]
+        }
+      }
+    },
+    "env": {
+      "browser": true,
+      "es6": true,
+      "jest": true,
+      "node": true
+    },
+    "plugins": [
+      "html",
+      "jsx-a11y",
+      "react",
+      "react-hooks"
+    ],
+    "rules": {
+      "arrow-parens": [
+        "error",
+        "as-needed"
+      ],
+      "arrow-spacing": [
+        "error"
+      ],
+      "block-spacing": [
+        2,
+        "always"
+      ],
+      "comma-dangle": [
+        "error",
+        {
+          "arrays": "always-multiline",
+          "objects": "always-multiline",
+          "imports": "always-multiline",
+          "exports": "always-multiline",
+          "functions": "never"
+        }
+      ],
+      "curly": [
+        "error",
+        "all"
+      ],
+      "default-case": [
+        "error"
+      ],
+      "eol-last": [
+        "error",
+        "always"
+      ],
+      "eqeqeq": [
+        "error"
+      ],
+      "indent": [
+        "error",
+        2,
+        {
+          "VariableDeclarator": 2,
+          "SwitchCase": 1
+        }
+      ],
+      "jsx-quotes": [
+        "error",
+        "prefer-double"
+      ],
+      "key-spacing": [
+        2,
+        {
+          "beforeColon": false,
+          "afterColon": true
+        }
+      ],
+      "keyword-spacing": [
+        1,
+        {
+          "before": true,
+          "after": true
+        }
+      ],
+      "max-len": [
+        "error",
+        {
+          "code": 120,
+          "ignoreComments": true,
+          "ignoreRegExpLiterals": true,
+          "ignoreStrings": true,
+          "ignoreTemplateLiterals": true,
+          "ignoreUrls": true,
+          "ignorePattern": "\\s*<"
+        }
+      ],
+      "new-cap": [
+        "off"
+      ],
+      "no-console": [
+        "error",
+        {
+          "allow": [
+            "warn",
+            "error"
+          ]
+        }
+      ],
+      "no-debugger": [
+        "error"
+      ],
+      "no-duplicate-imports": [
+        "error"
+      ],
+      "no-else-return": [
+        "error"
+      ],
+      "no-fallthrough": [
+        "error"
+      ],
+      "no-multiple-empty-lines": [
+        "error",
+        {
+          "max": 1
+        }
+      ],
+      "no-undef": [
+        "error"
+      ],
+      "no-unneeded-ternary": [
+        "error"
+      ],
+      "no-unreachable": [
+        "error"
+      ],
+      "no-use-before-define": [
+        "error"
+      ],
+      "no-useless-return": [
+        "error"
+      ],
+      "no-whitespace-before-property": [
+        "error"
+      ],
+      "object-curly-spacing": [
+        "error",
+        "never"
+      ],
+      "prefer-const": [
+        "error"
+      ],
+      "prefer-rest-params": [
+        "error"
+      ],
+      "prefer-spread": [
+        "error"
+      ],
+      "quote-props": [
+        "error",
+        "as-needed"
+      ],
+      "require-await": [
+        "error"
+      ],
+      "require-jsdoc": [
+        "off"
+      ],
+      "space-infix-ops": [
+        "error"
+      ],
+      "valid-jsdoc": [
+        "off"
+      ],
+      "vars-on-top": [
+        "error"
+      ],
+      "react-hooks/rules-of-hooks": "error",
+      "react/jsx-fragments": [
+        "error",
+        "syntax"
+      ],
+      "react/jsx-closing-bracket-location": [
+        "error"
+      ],
+      "react/jsx-closing-tag-location": [
+        "error"
+      ],
+      "react/jsx-curly-brace-presence": [
+        "error",
+        "never"
+      ],
+      "react/jsx-curly-spacing": [
+        "error",
+        {
+          "when": "never",
+          "children": true
+        }
+      ],
+      "react/jsx-equals-spacing": [
+        "error"
+      ],
+      "react/jsx-filename-extension": [
+        "error"
+      ],
+      "react/jsx-no-comment-textnodes": [
+        "error"
+      ],
+      "react/jsx-no-duplicate-props": [
+        "error"
+      ],
+      "react/jsx-tag-spacing": [
+        "error"
+      ]
+    }
+  },
+  "jest": {
+    "clearMocks": true,
+    "collectCoverageFrom": [
+      "src/components/**/*.{js,jsx}"
+    ],
+    "coverageDirectory": "coverage",
+    "coverageThreshold": {
+      "global": {
+        "branches": 0,
+        "functions": 0,
+        "lines": 0,
+        "statements": 0
+      }
+    },
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/__mocks__/fileMock.js",
+      "\\.(module.css|css|sass|scss)$": "identity-obj-proxy"
+    },
+    "setupFiles": [
+      "<rootDir>enzyme.config.js",
+      "<rootDir>/node_modules/regenerator-runtime/runtime"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "testEnvironment": "jsdom",
+    "testMatch": [
+      "**/?(*.)+(spec|test).js?(x)"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "testURL": "https://domainname.com/",
+    "watchPathIgnorePatterns": [
+      "/dist/"
+    ]
+  },
+  "stylelint": {
+    "plugins": [
+      "stylelint-a11y"
+    ],
+    "ignoreFiles": "./dist/**/*.css",
+    "extends": [
+      "stylelint-config-recommended",
+      "stylelint-config-css-modules"
+    ],
+    "rules": {
+      "selector-type-no-unknown": [
+        true,
+        {
+          "ignoreTypes": [
+            "/^xc-/"
+          ]
+        }
+      ],
+      "declaration-colon-space-before": "never",
+      "declaration-colon-space-after": "always",
+      "a11y/media-prefers-reduced-motion": true,
+      "a11y/no-outline-none": true,
+      "a11y/selector-pseudo-class-focus": true,
+      "a11y/content-property-no-static-value": [
+        true,
+        {
+          "severity": "warning"
+        }
+      ],
+      "a11y/line-height-is-vertical-rhythmed": [
+        true,
+        {
+          "severity": "warning"
+        }
+      ],
+      "a11y/no-display-none": [
+        true,
+        {
+          "severity": "warning"
+        }
+      ],
+      "a11y/no-spread-text": [
+        true,
+        {
+          "severity": "warning"
+        }
+      ],
+      "a11y/no-obsolete-attribute": [
+        true,
+        {
+          "severity": "warning"
+        }
+      ],
+      "a11y/no-obsolete-element": [
+        true,
+        {
+          "severity": "warning"
+        }
+      ],
+      "a11y/no-text-align-justify": [
+        true,
+        {
+          "severity": "warning"
+        }
+      ]
+    }
+  }
+}
